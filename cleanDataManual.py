@@ -17,7 +17,7 @@ words = text.split()
 words = [w.lower() for w in words]
 #remove punctuation
 translator = str.maketrans('','',string.punctuation)
-for i in range(0,100):
+for i in range(0,len(words)):
     words[i] = words[i].translate(str.maketrans('','',string.punctuation))
     #we have to use this section as the downloaded text uses symbols not contained within string.punctuation
     words[i] = words[i].replace('“','')
