@@ -20,11 +20,14 @@ for i in range(0,len(tokens)):
     tokens[i] = tokens[i].replace('“','')
     tokens[i] = tokens[i].replace('’', '')
     tokens[i] = tokens[i].replace('”','')
-for i in range(0,10):
+
+#remove the empty string
+while("" in tokens):
+    tokens.remove("")
+
+for i in range(0,len(tokens)):
     print(tokens[i])
-tokens.remove('')
-for i in range(0,10):
-    print(tokens[i])
+print(tokens)
 
 
 
