@@ -21,7 +21,7 @@ def loadText(file):
     text = text.splitlines()
     for i in range(0,len(text)):
         text[i] = text[i].translate(str.maketrans('', '', string.punctuation))
-        text[i].lower()
+        text[i] = text[i].lower()
     return text
 #now a function to split each line into words
 #we want a list of lists (aka a generator of strings (see bagOfOWords.py))
@@ -57,7 +57,7 @@ def embedd(sentences):
 
 print("wordEmbeddings")
 #embedd(text)
-text = loadText("data/damonText.txt")
+text = loadText("data/everydayRobots.txt")
 sentences = splitSentences(text)
 embedd(sentences)
 print("end of word embeddings")
