@@ -88,4 +88,4 @@ def kerasBag(file):
     return t, encoded_docs
 
 #scikitBag("data/damonText.txt")
-kerasBag("data/damonText.txt")
+#kerasBag("data/damonText.txt")
