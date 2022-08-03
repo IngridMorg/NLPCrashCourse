@@ -20,8 +20,12 @@ for i in range(0,len(tokens)):
     tokens[i] = tokens[i].replace('“','')
     tokens[i] = tokens[i].replace('’', '')
     tokens[i] = tokens[i].replace('”','')
-for i in range(0,100):
+for i in range(0,10):
     print(tokens[i])
+tokens.remove('')
+for i in range(0,10):
+    print(tokens[i])
+
 
 
 
