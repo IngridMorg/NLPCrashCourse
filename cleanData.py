@@ -13,21 +13,24 @@ file.close()
 #remove punctuation first
 
 #tokenise the words
-tokens = word_tokenize(text)
-for i in range(0,len(tokens)):
-    tokens[i] = tokens[i].translate(str.maketrans('','',string.punctuation))
-    #we have to use this section as the downloaded text uses symbols not contained within string.punctuation
-    tokens[i] = tokens[i].replace('“','')
-    tokens[i] = tokens[i].replace('’', '')
-    tokens[i] = tokens[i].replace('”','')
+#returns a list of words from the text
+def clean(text):
+    tokens = word_tokenize(text)
+    for i in range(0,len(tokens)):
+        tokens[i] = tokens[i].translate(str.maketrans('','',string.punctuation))
+        #we have to use this section as the downloaded text uses symbols not contained within string.punctuation
+        tokens[i] = tokens[i].replace('“','')
+        tokens[i] = tokens[i].replace('’', '')
+        tokens[i] = tokens[i].replace('”','')
 
-#remove the empty string
-while("" in tokens):
-    tokens.remove("")
+    #remove the empty string
+    while("" in tokens):
+        tokens.remove("")
 
-for i in range(0,len(tokens)):
-    print(tokens[i])
-print(tokens)
+    #for i in range(0,len(tokens)):
+    #    print(tokens[i])
+    #print(tokens)
+    return tokens
 
 
 
