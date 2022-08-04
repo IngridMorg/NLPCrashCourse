@@ -94,6 +94,20 @@ def embedd(sentences, freq):
     #create a scatter plot of the projection
     #embeddPlot(model, result)
     return model
+
+def gensim_to_keras_embedding(model, train_embeddings=False):
+    #https://github.com/RaRe-Technologies/gensim/wiki/Using-Gensim-Embeddings-with-Keras-and-Tensorflow
+    keyed_vectors = model.wv  # structure holding the result of training
+    weights = keyed_vectors.vectors  # vectors themselves, a 2D numpy array
+    index_to_key = keyed_vectors.index_to_key  # which row in `weights` corresponds to which word?
+
+    layer = Embedding(
+        input_dim=weights.shape[0],
+        output_dim=weights.shape[1],
+        weights=[weights],
+        trainable=train_embeddings,
+    )
+    return layer
 def getVocabSize(sentences):
     model = Word2Vec(sentences, min_count=1)
     vocabSize = len(list(model.wv.vocab))
@@ -145,7 +159,8 @@ print("creating model")
 m = createModel(vocabSize, max_len)
 
 def fitModel(model, padded_docs, e, labels):
-    model.fit(padded_docs, labels, epochs=e,verbose=0)
+    #using a validation split lowers the accuracy but may well improve our actual application (yay!)
+    model.fit(padded_docs, labels, epochs=e,verbose=0,validation_split=0.2)
     #evaluate
     loss, accuracy = model.evaluate(padded_docs, labels, verbose=0)
     print('accuracy: %f' %(accuracy*100))
@@ -153,4 +168,4 @@ def fitModel(model, padded_docs, e, labels):
 #print(pd.shape)
 #print(labels.shape)
 #print(vocabSize)
-fitModel(m, pd, 5, labels)
+fitModel(m, pd, 1, labels)
