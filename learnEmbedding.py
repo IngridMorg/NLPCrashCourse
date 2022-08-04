@@ -57,11 +57,13 @@ def encodeDocs(vocab_size, docs):
 #we now need to pad the docs for the maximum length we have found
 def padDocs(encoded_docs, max_length):
     padded_docs = pad_sequences(encoded_docs, maxlen=max_length, padding='post')
-    print(padded_docs)
+    #print(padded_docs)
     return padded_docs
 
 ed = encodeDocs(50, docs)
+print(ed)
 pd = padDocs(ed, 4)
+print(pd)
 m = compileModel(50, 4)
 
 def fitModel(model, padded_docs, e, labels):

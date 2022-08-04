@@ -39,4 +39,5 @@ def saveData(text, type):
 
      file.close()
 
+#loadAll("data/pos",1)
 loadAll("data/neg",2)
