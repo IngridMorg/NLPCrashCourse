@@ -1,0 +1,55 @@
+quick notes on keras
+
+keras layer shape - tuples that represent how many elements an array or tensor has in each dimension
+    (3, 4, 4) - 3 dimensional layer, the first dimension has 3 elements and each of the 3 elements has 4 elements, each
+                of the 4 elements has 4 elements itself
+                the first statement '3 dimensional' comes from the shape being of the form (x, y, z)
+    this is why the flatten layer reduces to one dimension
+
+Flatten() - would convert (None, 8, 8) to (None, 64)
+            - same goes for (None, 8, 16) -> (None, 128)
+                -(None, x, y) -> (None, xy)
+
+Droput layers, critical for reducing over-fitting in neural networks
+    designed to remove the noise that may be present in neuron input
+    3 arguments - rate - tells the dropout layer how much of the input data has to be dropped,
+                        range (0.0 - 1.0)
+                  noise_shape - specifies the dimension of shape for applying a dropout layer
+                  seed - a parameter helps in providing random seed
+
+Reshape layers, change the shape of the input
+    reshape(4,5) applied to layer(batch_size,5,4) will create the output shape (batch_size,4,5)
+    layer_1 = Dense(16, input_shape(8,8))
+    model.add(layer_1)
+    layer_2 = Reshape((16,8))
+    model.add(layer_2)
+    >>>layer_2.output_shape
+    >>>(None, 16, 8)
+
+Permute Layers, use a pattern to alter the shape of the input. There is one argument which is the dimension of the pattern
+
+RepeatVector layers repeat the input for a fixed number of times
+    layer_1 = Dense(16, input_shape(8, ))
+    model.add(layer_1)
+    layer_2 = RepeatVector(16)
+    model.add(layer_2)
+    >>>layer_2.input_shape
+    >>>(None, 16)
+    >>>layer_2.output_shape
+    >>>(None, 16, 16)
+
+Lambda Layers, useed to transform the input data with the help of an expression or function.
+    Four arguments - Function - represents the lambda function
+                     output_shape - represents the shape of the transformed input
+                     mask - represents the mask to be applied (if any)
+                     arguments - represent the optional argument for the lambda function as a dictionary
+
+Pooling layer, used to apply max pooling operations on temporal data.
+                    pool_size = max pooling windows
+                    strides = the factor of downscale
+    MaxPooling1D,2D and 3D are used to apply operations onto spatial data
+
+Locally connected layers, similar to Conv1D layers but are different in how they utilise weights. Locally connected layers
+do not share weights.
+
+source = (https://machinelearningknowledge.ai/different-types-of-keras-layers-explained-for-beginners/)
